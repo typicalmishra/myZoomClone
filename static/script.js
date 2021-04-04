@@ -3,7 +3,7 @@ const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
     path: '/peerjs',
     host: '/',
-    port: '443'
+    port: '3000'
 })
 let myVideoStream;
 const myVideo = document.createElement('video')
@@ -73,7 +73,6 @@ myPeer.on('open', id => {
         if (usernameInput.value == "") {
 
         } else {
-
             username = usernameInput.value
             socket.emit('join-room', ROOM_ID, id, username)
             divForUsername.style.display = "none"
