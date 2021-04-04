@@ -119,6 +119,7 @@ video {
     background-color: transparent;
     border: none;
     color: #F5F5F5;
+    outline: none;
 }
 
 .leave_meeting {
