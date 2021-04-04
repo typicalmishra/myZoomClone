@@ -3,7 +3,7 @@ const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
     path: '/peerjs',
     host: '/',
-    port: '3000'
+    port: '443'
 })
 let myVideoStream;
 const myVideo = document.createElement('video')
@@ -64,8 +64,6 @@ myPeer.on('open', id => {
     let usernameInput = document.querySelector("#username")
     if (window.getComputedStyle(divForUsername).display == "none") {
         console.log("display none tha")
-        divForUsername.style.display = "flex"
-        document.querySelector(".main").style.display = "none"
     }
 
     divForUsername.addEventListener("submit", (e) => {
