@@ -3,10 +3,11 @@ const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
     path: '/peerjs',
     host: '/',
-    port: '443'
+    port: '3000'
 })
 let myVideoStream;
 const myVideo = document.createElement('video')
+myVideo.classList.add("myVideo")
 myVideo.muted = true;
 const peers = {}
 navigator.mediaDevices.getUserMedia({
@@ -16,6 +17,7 @@ navigator.mediaDevices.getUserMedia({
     myVideoStream = stream;
     addVideoStream(myVideo, stream)
     myPeer.on('call', call => {
+        console.log(username + " username")
         call.answer(stream)
         const video = document.createElement('video')
         call.on('stream', userVideoStream => {
@@ -23,8 +25,8 @@ navigator.mediaDevices.getUserMedia({
         })
     })
 
-    socket.on('user-connected', userId => {
-        connectToNewUser(userId, stream)
+    socket.on('user-connected', (userId, username) => {
+        connectToNewUser(userId, username, stream)
     })
 
     // input value
@@ -36,8 +38,11 @@ navigator.mediaDevices.getUserMedia({
             text.val('')
         }
     });
-    socket.on("createMessage", message => {
-        $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+    socket.on("createMessage", (message, userId, username) => {
+        if (username == "" || username == null) {
+            username = "Organizer"
+        }
+        $("ul").append(`<li class="message"><b>${username}</b><br/>${message}</li>`);
         scrollToBottom()
     })
 })
@@ -47,10 +52,32 @@ socket.on('user-disconnected', userId => {
 })
 
 myPeer.on('open', id => {
-    socket.emit('join-room', ROOM_ID, id)
+    console.log("Inside open functin")
+    let divForUsername = document.querySelector(".divForUsername")
+    let joinButton = document.querySelector("#join-button")
+    let usernameInput = document.querySelector("#username")
+    if (window.getComputedStyle(divForUsername).display == "none") {
+        console.log("display none tha")
+        divForUsername.style.display = "flex"
+        document.querySelector(".main").style.display = "none"
+    }
+    joinButton.addEventListener("submit", (e) => {
+        e.preventDefault()
+        if (usernameInput.value == "") {
+
+        } else {
+
+            username = usernameInput.value
+            socket.emit('join-room', ROOM_ID, id, username)
+            divForUsername.style.display = "none"
+            document.querySelector(".main").style.display = "flex"
+        }
+
+    })
 })
 
-function connectToNewUser(userId, stream) {
+
+function connectToNewUser(userId, username, stream) {
     const call = myPeer.call(userId, stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
@@ -132,4 +159,27 @@ const setPlayVideo = () => {
     <span>Play Video</span>
   `
     document.querySelector('.main__video_button').innerHTML = html;
+}
+
+
+
+const leaveMeeting = () => {
+    console.log('leave meeting')
+    const video = document.querySelector('video');
+
+    // A video's MediaStream object is available through its srcObject attribute
+    const mediaStream = video.srcObject;
+
+    // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
+    const tracks = mediaStream.getTracks();
+
+    // Tracks are returned as an array, so if you know you only have one, you can stop it with: 
+    tracks[0].stop();
+
+    // Or stop all like so:
+    tracks.forEach(track => track.stop())
+        // window.close();
+    setStopVideo()
+    setMuteButton()
+        // document.querySelector('.main__leave_meeting_button').innerHTML = html;
 }

@@ -3,6 +3,23 @@
     display: flex;
 }
 
+#video-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+video {
+    height: 300px;
+    width: 400px;
+    object-fit: cover;
+    padding: 8px;
+}
+
+.myVideo {
+    border: 1px solid gold;
+}
+
 .main__left {
     flex: 0.8;
     display: flex;
@@ -77,7 +94,7 @@
     overflow-y: auto;
 }
 
-.messages{
+.messages {
     color: white;
     list-style: none;
 }
@@ -98,7 +115,43 @@
     color: #EB534B;
 }
 
-.unmute, .stop {
+.unmute,
+.stop {
     color: #CC3B33;
 }
 
+.divForUsername {
+    position: absolute;
+    top: 18px;
+    left: 41%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.divForUsername #username {
+    border-radius: 7px;
+    padding: 2px 8px;
+    border: 2px solid #faf3f3;
+    outline: none;
+    font-size: 1rem;
+}
+
+.divForUsername #username:focus {
+    border: 2px solid #0E72ED;
+}
+
+.divForUsername #join-button {
+    padding: 2px 20px;
+    margin-top: 5px;
+    width: 100%;
+    background-color: rgb(14, 113, 235);
+    opacity: 1;
+    border-color: rgb(14, 113, 235);
+    color: rgb(255, 255, 255);
+    height: 40px !important;
+    font-size: 16px;
+    line-height: 31px !important;
+    border-radius: 12px;
+}

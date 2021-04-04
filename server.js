@@ -24,13 +24,13 @@ app.get('/:room', (req, res) => {
 })
 
 io.on('connection', socket => {
-    socket.on('join-room', (roomId, userId) => {
+    socket.on('join-room', (roomId, userId, username) => {
         socket.join(roomId)
-        socket.to(roomId).broadcast.emit('user-connected', userId);
+        socket.to(roomId).broadcast.emit('user-connected', userId, username);
         // messages
         socket.on('message', (message) => {
             //send message to the same room
-            io.to(roomId).emit('createMessage', message)
+            io.to(roomId).emit('createMessage', message, userId, username)
         });
 
         socket.on('disconnect', () => {
@@ -38,7 +38,7 @@ io.on('connection', socket => {
         })
     })
 })
-server.listen(process.env.PORT ||3000, () => {
+server.listen(process.env.PORT || 3000, () => {
     console.log(`Connected at 3000`);
 })
 
