@@ -30,10 +30,16 @@ navigator.mediaDevices.getUserMedia({
     })
 
     // input value
-    let text = $("input");
+    let text = $("#chat_message");
     // when press enter send message
     $('html').keydown(function(e) {
         if (e.which == 13 && text.val().length !== 0) {
+            socket.emit('message', text.val());
+            text.val('')
+        }
+    });
+    $('#send-message-icon').click(function(e) {
+        if (text.val().length !== 0) {
             socket.emit('message', text.val());
             text.val('')
         }
@@ -42,7 +48,7 @@ navigator.mediaDevices.getUserMedia({
         if (username == "" || username == null) {
             username = "Organizer"
         }
-        $("ul").append(`<li class="message"><b>${username}</b><br/>${message}</li>`);
+        $("ul").append(`<li class="message"><b>${username}</b><br>${message}</li>`);
         scrollToBottom()
     })
 })
@@ -180,7 +186,28 @@ const leaveMeeting = () => {
     // Or stop all like so:
     tracks.forEach(track => track.stop())
         // window.close();
+    opennewtab('https://www.google.com/')
     setStopVideo()
     setMuteButton()
         // document.querySelector('.main__leave_meeting_button').innerHTML = html;
+}
+
+
+
+function w3_open() {
+    document.getElementById("mySidebar").classList.add("display-flex")
+}
+
+function w3_close() {
+    document.getElementById("mySidebar").classList.remove("display-flex")
+}
+
+window.history.forward();
+
+function noBack() {
+    window.history.forward();
+}
+
+function opennewtab(url) {
+    var win = window.open(url, "_self");
 }

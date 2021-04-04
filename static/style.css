@@ -1,3 +1,8 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 .main {
     height: 100vh;
     display: flex;
@@ -44,8 +49,9 @@ video {
 }
 
 .main__right {
-    background-color: #242324;
+    background-color: #343232;
     border-left: 1px solid #3D3D42;
+    right: 0;
 }
 
 .main__controls {
@@ -81,6 +87,9 @@ video {
 .main__right {
     display: flex;
     flex-direction: column;
+    z-index: 1;
+    overflow: auto;
+    height: 100%;
 }
 
 .main__header {
@@ -97,6 +106,7 @@ video {
 .messages {
     color: white;
     list-style: none;
+    padding-left: 1rem;
 }
 
 .main__message_container {
@@ -121,9 +131,9 @@ video {
 }
 
 .divForUsername {
+    width: 100%;
     position: absolute;
     top: 18px;
-    left: 41%;
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -143,9 +153,8 @@ video {
 }
 
 .divForUsername #join-button {
-    padding: 2px 20px;
+    padding: 2px 81px;
     margin-top: 5px;
-    width: 100%;
     background-color: rgb(14, 113, 235);
     opacity: 1;
     border-color: rgb(14, 113, 235);
@@ -154,4 +163,67 @@ video {
     font-size: 16px;
     line-height: 31px !important;
     border-radius: 12px;
+}
+
+.close-chat-section-button {
+    background-color: grey;
+    color: #fff;
+    display: none;
+    width: 100%;
+    padding: 8px 16px;
+    text-align: left;
+    border: none;
+    white-space: normal;
+    float: none;
+    outline: 0;
+}
+
+#chat_message::placeholder {
+    color: wheat;
+    opacity: 1;
+}
+
+#send-message-icon {
+    color: wheat;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.open-chat-button {
+    cursor: pointer;
+}
+
+@media only screen and (max-width:950px) {
+    .main__left {
+        flex: 1;
+        width: 100%;
+    }
+    .main__right {
+        position: fixed!important;
+        display: none;
+    }
+    .close-chat-section-button {
+        display: block;
+    }
+}
+
+@media only screen and (max-width:500px) {
+    .main__controls__button {
+        padding: 5px 0px;
+        min-width: 70px;
+    }
+    .main__controls__button i {
+        font-size: 18px;
+    }
+    .leave_meeting {
+        font-size: 0.9rem;
+    }
+    /* .divForUsername {
+        left: 31%;
+    } */
+}
+
+.display-flex {
+    display: flex;
 }
