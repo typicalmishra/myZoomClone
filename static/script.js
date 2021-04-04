@@ -3,7 +3,7 @@ const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
     path: '/peerjs',
     host: '/',
-    port: '443'
+    port: '3000'
 })
 let myVideoStream;
 const myVideo = document.createElement('video')
@@ -61,7 +61,8 @@ myPeer.on('open', id => {
         divForUsername.style.display = "flex"
         document.querySelector(".main").style.display = "none"
     }
-    joinButton.addEventListener("submit", (e) => {
+
+    divForUsername.addEventListener("submit", (e) => {
         e.preventDefault()
         if (usernameInput.value == "") {
 
