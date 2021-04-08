@@ -225,6 +225,19 @@ video {
     } */
 }
 
+@media only screen and (max-width:400px) {
+    video {
+        height: 300px;
+        width: 100%;
+    }
+    .main__controls__button span {
+        font-size: 0.9rem;
+    }
+    .main__controls__button {
+        min-width: 55px;
+    }
+}
+
 .display-flex {
     display: flex;
 }
