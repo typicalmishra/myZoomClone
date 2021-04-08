@@ -226,6 +226,7 @@ video {
     .main__controls {
         position: absolute;
         bottom: 0;
+        width: 100%;
     }
 }
 
