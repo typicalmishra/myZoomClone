@@ -223,6 +223,10 @@ video {
     /* .divForUsername {
         left: 31%;
     } */
+    .main__controls {
+        position: absolute;
+        bottom: 0;
+    }
 }
 
 @media only screen and (max-width:400px) {
