@@ -2,6 +2,6 @@
 
 Credit to the Team Socket.io and Peer.JS
 
-Made with :heart: by [Satyam](https://www.instagram.com/typicalmishra/) & [Swapnil](https://www.instagram.com/)
+Made with :fire: by [Satyam](https://www.instagram.com/typicalmishra/) & [Swapnil](https://www.instagram.com/)
 
 
